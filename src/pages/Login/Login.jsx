@@ -1,8 +1,97 @@
-import { FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaArrowLeft, FaGoogle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { ImSpinner9 } from "react-icons/im";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useShop from "../../hooks/useShop";
 const Login = () => {
-    const highlightText={
+    const highlightText = {
         background: 'linear-gradient(to bottom, transparent 50%, #EA580C 50%)'
+    }
+    const [shop] = useShop();
+    const { signIn, googleSignIn, loading, setLoading } = useAuth();
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(res => {
+                const userInfo = {
+                    name: res.user.displayName,
+                    email: res.user.email,
+                    imageURL: res.user.photoURL,
+                    role: 'No Role',
+                    shopName: 'No Shop Name',
+                    shopLogo: 'No Shop Logo'
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "User Created Successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            setLoading(false);
+                        }
+                    })
+                const emailIncluded = shop.map(item => item.ownerEmail === res.user.email);
+                const isInclude = emailIncluded.includes(true);
+                if (isInclude) { navigate('/dashboard') }
+                else { navigate('/') }
+
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error(err.message);
+                setLoading(false);
+            })
+    }
+    const handleLogin = e => {
+        setLoading(true);
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        signIn(email, password)
+            .then(res => {
+                console.log(res.user);
+                setLoading(false);
+                if (res.user) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "You are successfully logged in",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    const emailIncluded = shop.map(item => item.ownerEmail === res.user.email);
+                    const isInclude = emailIncluded.includes(true);
+                    if (isInclude) { navigate('/dashboard') }
+                    else { navigate('/') }
+                }
+                else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Please verify your email!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
+            })
+            .catch(err => {
+                console.log(err);
+                Swal.fire({
+                    icon: "error",
+                    title: "Please give valid email and password!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setLoading(false);
+            })
     }
     return (
         <div>
@@ -20,22 +109,31 @@ const Login = () => {
                     </div>
 
                     <div className="card shrink-0 w-1/2 max-w-sm  backdrop-blur-sm bg-white/30 rounded-none">
-                        <form className="card-body">
+                        <form onSubmit={handleLogin} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" className="input input-bordered" required />
+                                <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required />
+                                <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             </div>
-                            <div className="form-control mt-6">
-                                <button className="btn btn-primary bg-blue-800 text-xl">Log In</button>
+                            <div className="form-control mt-3">
+                                <button className="btn btn-primary bg-blue-800 text-xl">
+                                    {
+                                        loading ? <ImSpinner9 className="animate-spin" /> : <p>Login</p>
+                                    }
+                                </button>
                             </div>
+                            <div className="text-center flex items-center bg-slate-300 rounded-lg p-2 mt-3">
+                                <p className="font-semibold">or, Login with google</p>
+                                <button onClick={handleGoogleSignIn} className="btn"><FaGoogle></FaGoogle></button>
+                            </div>
+                            <p className="text-center text-lg">Do not have an account? <Link to="/register" className="font-semibold text-white">Register</Link></p>
                         </form>
                     </div>
                 </div>

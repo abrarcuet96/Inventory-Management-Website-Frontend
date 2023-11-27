@@ -3,15 +3,21 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
+import CreateShop from "../pages/CreateShop/CreateShop";
+import Dashboard from "../layouts/DashboardLayout/Dashboard";
 
-const myRoutes= createBrowserRouter([
+const myRoutes = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout></MainLayout>,
-        children:[
+        children: [
             {
                 path: '/',
-                element:<Home></Home>
+                element: <Home></Home>
+            },
+            {
+                path: '/createStore',
+                element: <CreateShop></CreateShop>
             }
         ]
     },
@@ -22,6 +28,10 @@ const myRoutes= createBrowserRouter([
     {
         path: 'login',
         element: <Login></Login>
+    },
+    {
+        path:'dashboard',
+        element: <Dashboard></Dashboard>
     }
 ])
 export default myRoutes;

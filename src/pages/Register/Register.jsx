@@ -4,11 +4,21 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { ImSpinner9 } from "react-icons/im";
+import { useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+const image_hosting_key= import.meta.env.VITE_IMAGE_API_KEY;
+const image_hosting_api= `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const Register = () => {
-    const { createUser, updateUserProfile, loading, setLoading} = useAuth();
-    const navigate= useNavigate();
+    const { createUser, updateUserProfile, loading, setLoading } = useAuth();
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
+    const [uploadButton, setUploadButton] = useState('Upload Image');
     const highlightText = {
         background: 'linear-gradient(to bottom, transparent 50%, #EA580C 50%)'
+    }
+    const handleImageText = image => {
+        setUploadButton(image.name);
     }
     const handleRegister = async e => {
         setLoading(true);
@@ -20,32 +30,65 @@ const Register = () => {
         const image = form.image.files[0];
         const formData = new FormData();
         formData.append('image', image);
-        const {data}= await axios.post(`https://api.imgbb.com/1/upload?key=409d63a85c8999929d0d38334663991f`,formData);
-        // console.log(data);
+        const { data } = await axios.post(image_hosting_api, formData,{
+            headers:{
+                'content-type': 'multipart/form-data'
+            }
+        });
+        console.log(data);
         console.log(name, email, password, data.data.display_url);
         if (password.length < 6) {
             toast.error('Password should be at least 6 characters or long');
+            setLoading(false);
             return;
         }
         else if (!/^(?=.*[A-Z]).+$/.test(password)) {
             toast.error('Your password should have at least one upper case character');
+            setLoading(false);
             return;
         }
         else if (!/^(?=.*[\W_]).+$/.test(password)) {
             toast.error('Your password should have at least one special character');
+            setLoading(false);
             return;
         }
         createUser(email, password)
             .then(res => {
                 console.log(res.user);
-                updateUserProfile(name, data.data.display_url);
-                toast.success('User Created Successfully');
-                setLoading(false);
-                navigate('/');
+                updateUserProfile(name, data.data.display_url)
+                    .then(() => {
+                        // send user info to database
+                        const userInfo = {
+                            name: name,
+                            email: email,
+                            imageURL: data.data.display_url,
+                            role: 'No Role',
+                            shopName: 'No Shop Name',
+                            shopLogo: 'No Shop Logo'
+
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "User Created Successfully",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    setLoading(false);
+
+                                }
+                            })
+                        navigate('/createStore');
+                    })
+
+
             })
             .catch(err => {
                 console.log(err);
                 toast.error(err.message);
+                setLoading(false);
             })
     }
     return (
@@ -82,22 +125,30 @@ const Register = () => {
                                 </label>
                                 <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             </div>
-                            <div>
-                                <label htmlFor='image' className='block mb-2 text-sm'>
-                                    Select Image:
-                                </label>
-                                <input
-                                    required
-                                    type='file'
-                                    id='image'
-                                    name='image'
-                                    accept='image/*'
-                                />
+                            <div className=' p-2 bg-white w-full  mt-5 rounded-lg'>
+                                <div className='file_upload px-3 py-2 relative border-4 border-dotted border-gray-300 rounded-lg'>
+                                    <div className='flex flex-col  text-center'>
+                                        <label>
+                                            <input
+                                                onChange={e => handleImageText(e.target.files[0])}
+                                                className='text-sm cursor-pointer w-36 hidden'
+                                                type='file'
+                                                name='image'
+                                                id='image'
+                                                accept='image/*'
+                                                hidden
+                                            />
+                                            <div className='btn btn-primary bg-blue-800 text-white border border-gray-300 font-semibold cursor-pointer p-1 px-3 w-full rounded-lg'>
+                                                {uploadButton}
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="form-control mt-6">
+                            <div className="form-control mt-5">
                                 <button className="btn btn-primary bg-blue-800 text-xl">
                                     {
-                                        loading ? <ImSpinner9 className="animate-spin"/> : <p>Register</p>
+                                        loading ? <ImSpinner9 className="animate-spin" /> : <p>Register</p>
                                     }
                                 </button>
 

@@ -24,27 +24,27 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
     // update user profile:
-    const updateUserProfile=(name, photo)=>{
+    const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: photo
         });
     }
     // log out:
-    const logOut=()=>{
+    const logOut = () => {
         setLoading(true);
         return signOut(auth);
     }
     // auth state change handling:
-    useEffect(()=>{
-        const unsubscribe= onAuthStateChanged(auth, currentUser=>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             setLoading(false);
         });
-        return ()=>{
+        return () => {
             return unsubscribe();
         }
-    },[])
+    }, [])
     const authInfo = {
         user,
         loading,

@@ -1,7 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import SectionContainer from "../Container/SectionContainer";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
+    const { user, logOut } = useAuth();
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
     const navLinks = <>
         <li className="text-lg font-semibold">
             <NavLink
@@ -72,7 +79,20 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800">Login</Link>
+                    {
+                        user ?
+                            <>
+                                <div className="flex flex-row">
+                                    <div className="bg-white mr-2 p-1 rounded-lg max-sm:hidden  w-full">
+                                        <span className="w-30 h-2 m-2 font-semibold">{user?.displayName}</span>
+
+                                    </div>
+                                    <img className="w-8 h-8 mr-2 rounded-full" src={user?.photoURL} alt="" />
+                                    <button onClick={handleLogOut}><Link className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800" to="/">LogOut</Link></button>
+                                </div>
+                            </> : <Link to="/login" className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800">Login</Link>
+                    }
+
                 </div>
             </div>
         </SectionContainer>
