@@ -8,6 +8,8 @@ import Dashboard from "../layouts/DashboardLayout/Dashboard";
 import ManagerHome from "../pages/Dashboard/ManagerHome/ManagerHome";
 import AddProduct from "../pages/AddProduct/AddProduct";
 import Subscription from "../pages/Subscription/Subscription";
+import ProductsSection from "../pages/ProductsSection/ProductsSection";
+import UpdateProduct from "../pages/UpdateProductDetails/UpdateProduct";
 
 const myRoutes = createBrowserRouter([
     {
@@ -47,6 +49,15 @@ const myRoutes = createBrowserRouter([
             {
                 path:'subscription',
                 element: <Subscription></Subscription>
+            },
+            {
+                path:'productsSection',
+                element: <ProductsSection></ProductsSection>
+            },
+            {
+                path:'updateProductDetails/:email/:id',
+                element: <UpdateProduct></UpdateProduct>,
+                loader: ({params})=> fetch(`http://localhost:5000/products/email/${params.id}`)
             },
         ]
     }

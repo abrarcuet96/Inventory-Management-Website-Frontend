@@ -6,13 +6,13 @@ const useProducts = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     console.log(user?.email);
-    const { data: productData = {}, isPending: productLoading } = useQuery({
+    const { data: productData = {}, isPending: productLoading, refetch } = useQuery({
         queryKey: ['productData', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/products/${user.email}`);
             return res.data;
         }
     })
-    return [productData, productLoading];
+    return [productData, productLoading, refetch];
 }
 export default useProducts;
