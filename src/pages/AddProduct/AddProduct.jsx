@@ -23,7 +23,9 @@ const AddProduct = () => {
         });
         console.log(res.data.success);
         if (res.data.success) {
-            const sellingPrice = parseInt(data.productionCost) + (parseInt(data.productionCost) * parseInt(data.profitMargin)) / 100;
+            const sellingPriceBefore= parseInt(data.productionCost) + (parseInt(data.productionCost) * parseInt(data.profitMargin)) / 100;
+            const sellingPriceDiscount = ((parseInt(data.productionCost) + (parseInt(data.productionCost) * parseInt(data.profitMargin)) / 100)*parseInt(data.productDiscount))/100;
+            const sellingPrice= sellingPriceBefore-sellingPriceDiscount;
             const totalTax = (sellingPrice * 7.5) / 100;
             const totalSellingPrice = sellingPrice + totalTax;
             const productInfo = {

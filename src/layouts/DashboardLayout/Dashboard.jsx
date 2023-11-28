@@ -43,6 +43,12 @@ const Dashboard = () => {
                                 <NavLink to='/dashboard/productsSection'>Products Section</NavLink>
                             </li>
                             <li className="font-bold">
+                                <NavLink to='/dashboard/allProductsSection'>All Products</NavLink>
+                            </li>
+                            <li className="font-bold">
+                                <NavLink to='/dashboard/checkOutCart'>Check_Out</NavLink>
+                            </li>
+                            <li className="font-bold">
                                 <NavLink to='/'>Home</NavLink>
                             </li>
                         </>

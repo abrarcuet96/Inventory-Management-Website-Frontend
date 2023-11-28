@@ -10,6 +10,8 @@ import AddProduct from "../pages/AddProduct/AddProduct";
 import Subscription from "../pages/Subscription/Subscription";
 import ProductsSection from "../pages/ProductsSection/ProductsSection";
 import UpdateProduct from "../pages/UpdateProductDetails/UpdateProduct";
+import AllProducts from "../pages/AllProducts/AllProducts";
+import CheckOutCart from "../pages/CheckOutCart/CheckOutCart";
 
 const myRoutes = createBrowserRouter([
     {
@@ -53,6 +55,14 @@ const myRoutes = createBrowserRouter([
             {
                 path:'productsSection',
                 element: <ProductsSection></ProductsSection>
+            },
+            {
+                path:'allProductsSection',
+                element: <AllProducts></AllProducts>
+            },
+            {
+                path:'checkOutCart',
+                element: <CheckOutCart></CheckOutCart>
             },
             {
                 path:'updateProductDetails/:email/:id',
