@@ -1,6 +1,6 @@
 import useProducts from "../../hooks/useProducts";
 import { IoIosArrowBack } from "react-icons/io";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -22,17 +22,31 @@ const AllProducts = () => {
         setNewProduct(productDataNew[0]);
         reset();
     }
-    const handleProductCart = async (product) => {
-        const res = await axiosSecure.post('/cart', product);
-        if (res.data.insertedId) {
-            Swal.fire({
-                icon: "success",
-                title: `Congratulations! Your Product is Added to the cart`,
-                showConfirmButton: false,
-                timer: 1500
-            });
-            navigate('/dashboard/checkOutCart');
-        }
+    const handleProductCart = (product) => {
+        Swal.fire({
+            title: "Are you sure you want to add this to the cart?",
+            text: "You won't be able to revert this!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Proceed Checkout"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.post('/cart', product)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: "Product Added! to the cart",
+                                text: "Product adding successful",
+                                icon: "success"
+                            });
+                            navigate('/dashboard/checkOutCart');
+                        }
+                    })
+
+            }
+        });
     }
     return (
         <div>

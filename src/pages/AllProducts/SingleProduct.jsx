@@ -1,5 +1,4 @@
 import { CiMoneyCheck1 } from "react-icons/ci";
-import { Link } from "react-router-dom";
 
 const SingleProduct = ({ product, handleProductCart }) => {
     const { productName, productImage, productDescription, productLocation, productionCost, productionQuantity, profitMargin, productDiscount, productAddedDate, shopName, userEmail, sellingPrice, saleCount } = product;
@@ -23,7 +22,7 @@ const SingleProduct = ({ product, handleProductCart }) => {
             <th>{newProduct.productionQuantity}</th>
             <th>$ {newProduct.productDiscount}</th>
             <th>$ {newProduct.sellingPrice}</th>
-            <th><Link to={`/dashboard/checkOutCart`}><button onClick={() => handleProductCart(newProduct)} className="btn btn-ghost btn-md"><CiMoneyCheck1 className="text-4xl text-blue-800" /></button></Link></th>
+            <th><button onClick={() => handleProductCart(newProduct)} className="btn btn-ghost btn-md"><CiMoneyCheck1 className="text-4xl text-blue-800" /></button></th>
         </tr>
     );
 };

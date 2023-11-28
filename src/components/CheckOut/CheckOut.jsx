@@ -1,18 +1,94 @@
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import useProducts from "../../hooks/useProducts";
 
-const CheckOut = ({ item, cartLoading }) => {
+const CheckOut = ({ item, cartLoading, refetch }) => {
+    const { _id,productName, productImage, productDescription, productLocation, productionCost, productionQuantity, profitMargin, productDiscount, productAddedDate, shopName, userEmail, sellingPrice, saleCount } = item;
+    const newItem = { _id,productName, productImage, productDescription, productLocation, productionCost, productionQuantity, profitMargin, productDiscount, productAddedDate, shopName, userEmail, sellingPrice, saleCount };
+    const [productData]=useProducts();
+    console.log(productData);
+    const productId= productData.filter(data=> data.productName === productName);
+    console.log(productId[0]);
+    const axiosSecure = useAxiosSecure();
+
+    const handleGetPaid = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Get Paid"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const dateTime = new Date();
+                const saleData = {
+                    ...newItem,
+                    dateTime: dateTime
+                }
+                axiosSecure.post('/sales', saleData)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: "Product is paid",
+                                text: "Product paid successfully",
+                                icon: "success"
+                            });
+                            axiosSecure.delete(`/cart/${newItem._id}`)
+                                .then(res => {
+                                    if (res.data.deletedCount > 0) {
+                                        refetch();
+                                    }
+                                })
+                            const newSaleCount = newItem.saleCount + 1;
+                            const newQuantity = parseInt(productionQuantity) - 1;
+                            const newQuantityString = newQuantity.toString();
+                            const newInfo = {
+                                productName: productName,
+                                productImage: productImage,
+                                productDescription: productDescription,
+                                productLocation: productLocation,
+                                productionCost: productionCost,
+                                productionQuantity: newQuantityString,
+                                profitMargin: profitMargin,
+                                productDiscount: productDiscount,
+                                productAddedDate: new Date(),
+                                shopName: shopName,
+                                userEmail: userEmail,
+                                sellingPrice: sellingPrice,
+                                saleCount: newSaleCount
+                            }
+                            console.log(newInfo);
+                            console.log(id);
+                            axiosSecure.patch(`/products/${id}`, newInfo)
+                                .then(res => {
+                                    console.log(res.data);
+                                    if (res.data.modifiedCount > 0) {
+                                        refetch();
+                                        toast.success('quantity is decreased and sales count is increased');
+                                    }
+                                })
+                        }
+                    })
+
+            }
+        });
+    }
     return (
         <div>
             {
                 cartLoading ? '' :
                     <div className="card w-96 h-96 bg-base-200 rounded-none">
                         <figure className="px-10 pt-10">
-                            <img src={item.productImage} alt="Shoes" className="rounded-xl" />
+                            <img src={newItem.productImage} alt="Shoes" className="rounded-xl" />
                         </figure>
                         <div className="card-body items-center text-center">
-                            <h2 className="card-title text-blue-800 font-bold">{item.productName}</h2>
-                            <p className="text-xl font-semibold">$ {item.sellingPrice}</p>
+                            <h2 className="card-title text-blue-800 font-bold">{newItem.productName}</h2>
+                            <p className="text-xl font-semibold">$ {newItem.sellingPrice}</p>
                             <div className="card-actions">
-                                <button className="btn btn-primary text-xl">Proceed Check Out</button>
+                                <button onClick={() => handleGetPaid(productId[0]._id)} className="btn btn-primary text-xl">Get Paid</button>
                             </div>
                         </div>
                     </div>

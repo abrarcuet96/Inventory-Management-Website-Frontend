@@ -8,7 +8,7 @@ const CheckOutCart = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 m-5">
             {
-                cartLoading? '': cartData.map(item=> <CheckOut key={item._id} item={item} cartLoading={cartLoading}></CheckOut>)
+                cartLoading? '': cartData.map(item=> <CheckOut key={item._id} item={item} cartLoading={cartLoading} refetch={refetch}></CheckOut>)
             }
         </div>
     );
