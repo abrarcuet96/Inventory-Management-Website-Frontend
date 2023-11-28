@@ -39,8 +39,8 @@ const Login = () => {
                     })
                 const emailIncluded = shop.map(item => item.ownerEmail === res.user.email);
                 const isInclude = emailIncluded.includes(true);
-                if (isInclude) { navigate('/dashboard') }
-                else { navigate('/') }
+                if (isInclude) { navigate('/dashboard/managerHome') }
+                else { navigate('/createStore') }
 
             })
             .catch(err => {
@@ -69,8 +69,8 @@ const Login = () => {
                     });
                     const emailIncluded = shop.map(item => item.ownerEmail === res.user.email);
                     const isInclude = emailIncluded.includes(true);
-                    if (isInclude) { navigate('/dashboard') }
-                    else { navigate('/') }
+                    if (isInclude) { navigate('/dashboard/managerHome') }
+                    else { navigate('/createStore') }
                 }
                 else {
                     Swal.fire({

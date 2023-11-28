@@ -38,7 +38,7 @@ const CreateShop = () => {
                 const userInfo = {
                     name: user.displayName,
                     email: user.email,
-                    imageURL: res.data.data.display_url,
+                    imageURL: user.photoURL,
                     role: 'manager',
                     shopName: data.shopName,
                     shopLogo: res.data.data.display_url,
