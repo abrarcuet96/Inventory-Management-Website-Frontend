@@ -1,14 +1,14 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import toast from "react-hot-toast";
 import useProducts from "../../hooks/useProducts";
-
+import { jsPDF } from "jspdf";
 const CheckOut = ({ item, cartLoading, refetch }) => {
-    const { _id,productName, productImage, productDescription, productLocation, productionCost, productionQuantity, profitMargin, productDiscount, productAddedDate, shopName, userEmail, sellingPrice, saleCount } = item;
-    const newItem = { _id,productName, productImage, productDescription, productLocation, productionCost, productionQuantity, profitMargin, productDiscount, productAddedDate, shopName, userEmail, sellingPrice, saleCount };
-    const [productData]=useProducts();
+    const { _id, productName, productImage, productDescription, productLocation, productionCost, productionQuantity, profitMargin, productDiscount, productAddedDate, shopName, userEmail, sellingPrice, saleCount } = item;
+    const newId = { _id };
+    const newItem = { productName, productImage, productDescription, productLocation, productionCost, productionQuantity, profitMargin, productDiscount, productAddedDate, shopName, userEmail, sellingPrice, saleCount };
+    const [productData] = useProducts();
     console.log(productData);
-    const productId= productData.filter(data=> data.productName === productName);
+    const productId = productData.filter(data => data.productName === productName);
     console.log(productId[0]);
     const axiosSecure = useAxiosSecure();
 
@@ -36,14 +36,14 @@ const CheckOut = ({ item, cartLoading, refetch }) => {
                                 text: "Product paid successfully",
                                 icon: "success"
                             });
-                            axiosSecure.delete(`/cart/${newItem._id}`)
+                            axiosSecure.delete(`/cart/${newId._id}`)
                                 .then(res => {
                                     if (res.data.deletedCount > 0) {
                                         refetch();
                                     }
                                 })
                             const newSaleCount = newItem.saleCount + 1;
-                            const newQuantity = parseInt(productionQuantity) - 1;
+                            const newQuantity = parseInt(productionQuantity) === 0 ? parseInt(productionQuantity) : parseInt(productionQuantity) - 1;
                             const newQuantityString = newQuantity.toString();
                             const newInfo = {
                                 productName: productName,
@@ -60,14 +60,28 @@ const CheckOut = ({ item, cartLoading, refetch }) => {
                                 sellingPrice: sellingPrice,
                                 saleCount: newSaleCount
                             }
-                            console.log(newInfo);
+                            const pdfArray = [
+                                `Product Name: ${newInfo.productName}`,
+                                `Product Description: ${newInfo.productDescription}`,
+                                `Product Location: ${newInfo.productLocation}`,
+                                `Production Cost: ${newInfo.productionCost}`,
+                                `Production Quantity: ${newInfo.productionQuantity}`,
+                                `Profit Margin: ${newInfo.profitMargin}`,
+                                `Product Discount: ${newInfo.productDiscount}`,
+                                `User Email: ${newInfo.userEmail}`,
+                                `Sale Count: ${newInfo.saleCount}`,
+
+                            ];
+                            console.log(pdfArray);
                             console.log(id);
                             axiosSecure.patch(`/products/${id}`, newInfo)
                                 .then(res => {
                                     console.log(res.data);
                                     if (res.data.modifiedCount > 0) {
                                         refetch();
-                                        toast.success('quantity is decreased and sales count is increased');
+                                        const doc = new jsPDF();
+                                        doc.text(pdfArray, 10, 10);
+                                        doc.save("sale_info.pdf");
                                     }
                                 })
                         }

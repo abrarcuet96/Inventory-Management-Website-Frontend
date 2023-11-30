@@ -64,7 +64,8 @@ const Register = () => {
                             imageURL: data.data.display_url,
                             role: 'No Role',
                             shopName: 'No Shop Name',
-                            shopLogo: 'No Shop Logo'
+                            shopLogo: 'No Shop Logo',
+                            income: ''
 
                         }
                         axiosPublic.post('/users', userInfo)

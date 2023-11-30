@@ -1,0 +1,20 @@
+[
+    {
+        "id":"1",
+        "plan": "Starter",
+        "payment": 10,
+        "limit": 200
+    },
+    {
+        "id":"2",
+        "plan": "Standard",
+        "payment": 20,
+        "limit": 450
+    },
+    {
+        "id":"3",
+        "plan": "Advanced",
+        "payment": 50,
+        "limit": 1500
+    }
+]

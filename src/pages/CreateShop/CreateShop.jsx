@@ -5,9 +5,30 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import usePurchase from "../../hooks/usePurchase";
+import { useEffect, useState } from "react";
 const image_hosting_key = import.meta.env.VITE_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const CreateShop = () => {
+    const [userPurchaseData, purchaseLoading] = usePurchase();
+    const [maxPurchase, setMaxPurchase] = useState(0);
+    const [productLimit, setProductLimit] = useState(0);
+    useEffect(() => {
+        console.log(userPurchaseData.length);
+        if (userPurchaseData.length > 0) {
+            const maxPriceObj = purchaseLoading ? '' : userPurchaseData.reduce((maxObj, currentObj) => {
+                return currentObj.price > maxObj.price ? currentObj : maxObj;
+            }, userPurchaseData[0]);
+            console.log(maxPriceObj.price);
+            setMaxPurchase(maxPriceObj.price);
+            console.log(maxPurchase);
+            if (maxPurchase === 10) { setProductLimit(200); console.log(productLimit); }
+            else if (maxPurchase === 20) { setProductLimit(450); console.log(productLimit); }
+            else if (maxPurchase === 50) { setProductLimit(1500); console.log(productLimit); }
+            else { setProductLimit(3) }
+            console.log(productLimit);
+        } else { setProductLimit(3); console.log(productLimit); }
+    }, [userPurchaseData, purchaseLoading, maxPurchase, productLimit])
     const { user } = useAuth();
     console.log(user);
     const { register, handleSubmit, reset } = useForm();
@@ -30,7 +51,9 @@ const CreateShop = () => {
                 shopLocation: data.shopLocation,
                 ownerEmail: data.ownerEmail,
                 ownerName: data.ownerName,
+                productLimit: productLimit
             }
+            console.log(shopInfo);
             const shopInfoToDB = await axiosSecure.post(`/shops/${user.email}`, shopInfo);
             console.log(shopInfoToDB.data);
             if (shopInfoToDB.data.insertedId) {
@@ -42,8 +65,9 @@ const CreateShop = () => {
                     role: 'manager',
                     shopName: data.shopName,
                     shopLogo: res.data.data.display_url,
+                    income: ''
                 }
-                const updateUserInfo = await axiosPublic.patch(`/users`, userInfo);
+                const updateUserInfo = await axiosSecure.patch(`/users`, userInfo);
                 console.log(updateUserInfo.data);
                 if (updateUserInfo.data.modifiedCount > 0) {
                     Swal.fire({
@@ -143,7 +167,9 @@ const CreateShop = () => {
                         </div>
                     </div>
                     <div className="flex justify-center my-2">
-                        <button className="btn btn-primary bg-blue-800 text-white  font-semibold cursor-pointer p-1 px-3 w-1/2 rounded-lg text-xl">Create Shop <FaShop className="" /></button>
+                        
+                            <button className="btn btn-primary bg-blue-800 text-white  font-semibold cursor-pointer p-1 px-3 w-full rounded-lg text-xl">Create Shop <FaShop className="" /></button>
+                        
                     </div>
                 </form>
             </div>

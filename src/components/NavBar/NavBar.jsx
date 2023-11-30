@@ -1,56 +1,77 @@
 import { Link, NavLink } from "react-router-dom";
 import SectionContainer from "../Container/SectionContainer";
 import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 
 const NavBar = () => {
+    const [userData, loading] = useUser();
+    console.log(userData[0]);
     const { user, logOut } = useAuth();
     const handleLogOut = () => {
         logOut()
             .then()
             .catch()
     }
-    const navLinks = <>
-        <li className="text-lg font-semibold">
-            <NavLink
-                to="/"
-                className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "text-blue-800" : ""
-                }
-            >
-                Home
-            </NavLink>
-        </li>
-        <li className="text-lg font-semibold">
-            <NavLink
-                to="/register"
-                className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "text-blue-800" : ""
-                }
-            >
-                Register
-            </NavLink>
-        </li>
-        <li className="text-lg font-semibold">
-            <NavLink
-                to="/createStore"
-                className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "text-blue-800" : ""
-                }
-            >
-                Create_Store
-            </NavLink>
-        </li>
-        <li className="text-lg font-semibold">
-            <NavLink
-                to="/watchDemo"
-                className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "text-blue-800" : ""
-                }
-            >
-                Watch_Demo
-            </NavLink>
-        </li>
-    </>
+    const navLinks =
+        <>
+            {
+                loading ? <progress className="progress w-56"></progress> :
+                    <>
+                        <li className="text-lg font-semibold">
+                            <NavLink
+                                to="/"
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                }
+                            >
+                                Home
+                            </NavLink>
+                        </li>
+                        <li className="text-lg font-semibold">
+                            <NavLink
+                                to="/register"
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                }
+                            >
+                                Register
+                            </NavLink>
+                        </li>
+                        {
+                            userData[0]?.role === 'manager' ?
+                                <li className="text-lg font-semibold">
+                                    <NavLink
+                                        to="dashboard/managerHome"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                        }
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                </li> : <li className="text-lg font-semibold">
+                                    <NavLink
+                                        to="/createStore"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                        }
+                                    >
+                                        Create_Store
+                                    </NavLink>
+                                </li>
+                        }
+                        <li className="text-lg font-semibold">
+                            <NavLink
+                                to="/watchDemo"
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                }
+                            >
+                                Watch_Demo
+                            </NavLink>
+                        </li>
+                    </>
+            }
+        </>
     return (
         <SectionContainer>
             <div className="navbar bg-base-100 border-b-4 border-blue-800">
@@ -88,7 +109,9 @@ const NavBar = () => {
 
                                     </div>
                                     <img className="w-8 h-8 mr-2 rounded-full" src={user?.photoURL} alt="" />
-                                    <button onClick={handleLogOut}><Link className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800" to="/">LogOut</Link></button>
+                                    <Link to="/">
+                                        <button onClick={handleLogOut}><Link className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800" to="/">LogOut</Link></button>
+                                    </Link>
                                 </div>
                             </> : <Link to="/login" className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800">Login</Link>
                     }

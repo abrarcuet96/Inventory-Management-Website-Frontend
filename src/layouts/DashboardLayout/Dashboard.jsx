@@ -1,8 +1,16 @@
 import { NavLink, Outlet } from "react-router-dom";
 import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
     const [userData, loading] = useUser();
+    console.log(userData);
+    const { logOut } = useAuth();
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -17,44 +25,74 @@ const Dashboard = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
 
-                    <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content">
-                        {/* Sidebar content here */}
-                        {
-                            loading ? '' : <>
-                                <div className="flex flex-col justify-center items-center">
-                                    <div className="flex flex-col justify-center items-center">
-                                        <img className="w-[50px] mb-2 rounded-full" src={userData[0].imageURL} alt="" />
-                                        <h2 className="text-xl mb-2 font-semibold">{userData[0].name}</h2>
-                                    </div>
-                                </div>
-                            </>
-                        }
-                        {<>
-                            <li className="font-bold">
-                                <NavLink to='/dashboard/managerHome'>Manager Home</NavLink>
-                            </li>
-                            <li className="font-bold">
-                                <NavLink to='/dashboard/addProduct'>Add Product</NavLink>
-                            </li>
-                            <li className="font-bold">
-                                <NavLink to='/dashboard/subscription'>Subscription</NavLink>
-                            </li>
-                            <li className="font-bold">
-                                <NavLink to='/dashboard/productsSection'>Products Section</NavLink>
-                            </li>
-                            <li className="font-bold">
-                                <NavLink to='/dashboard/allProductsSection'>All Products</NavLink>
-                            </li>
-                            <li className="font-bold">
-                                <NavLink to='/dashboard/checkOutCart'>Check_Out</NavLink>
-                            </li>
-                            <li className="font-bold">
-                                <NavLink to='/'>Home</NavLink>
-                            </li>
-                        </>
 
-                        }
-                    </ul>
+                    {/* Sidebar content here */}
+                    {
+                        loading ? <progress className="progress w-56"></progress> :
+                            <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content flex justify-between">
+                                <div>
+                                    <>
+                                        <div className="flex flex-col justify-center items-center">
+                                            <div className="flex flex-col justify-center items-center">
+                                                <img className="w-[50px] mb-2 rounded-full" src={userData[0]?.imageURL} alt="" />
+                                                <h2 className="text-xl mb-2 font-semibold">{userData[0]?.name}</h2>
+                                            </div>
+                                        </div>
+                                    </>
+                                    {
+                                        userData[0]?.role === 'admin' ?
+                                            <>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/adminHome'>Admin Home</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/manageShop'>Manage Shop</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/adminSaleSummary'>Sale Summary</NavLink>
+                                                </li>
+                                            </>
+                                            :
+                                            <>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/managerHome'>Manager Home</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/addProduct'>Add Product</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/subscription'>Subscription</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/productsSection'>Products Section</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/allProductsSection'>All Products</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/checkOutCart'>Check Out</NavLink>
+                                                </li>
+                                                <li className="font-bold">
+                                                    <NavLink to='/dashboard/saleSummary'>Sales Summary</NavLink>
+                                                </li>
+                                            </>
+                                    }
+                                </div>
+                                <div>
+                                    <li className="font-bold">
+                                        <NavLink to='/'>Home</NavLink>
+                                    </li>
+                                    <li className="font-bold">
+                                        <NavLink to='/'><button onClick={handleLogOut}>Log Out</button></NavLink>
+                                    </li>
+                                </div>
+                            </ul>
+                    }
+
+
+
+
+
 
                 </div>
             </div>

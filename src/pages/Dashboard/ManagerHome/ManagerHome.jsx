@@ -20,6 +20,7 @@ const ManagerHome = () => {
                             <img className="w-[200px] mb-2 rounded-full" src={userData[0].imageURL} alt="" />
                             <h2 className="text-4xl mb-2 font-semibold">{userData[0].name}</h2>
                             <h2 className="text-6xl font-bold">{userData[0].shopName}</h2>
+                            <h2 className="text-6xl font-bold text-blue-800">Manager</h2>
                         </div>
                     </div>
                 </>

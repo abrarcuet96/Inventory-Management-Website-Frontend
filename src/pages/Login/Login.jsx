@@ -5,15 +5,15 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { ImSpinner9 } from "react-icons/im";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useShop from "../../hooks/useShop";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const Login = () => {
     const highlightText = {
         background: 'linear-gradient(to bottom, transparent 50%, #EA580C 50%)'
     }
-    const [shop] = useShop();
     const { signIn, googleSignIn, loading, setLoading } = useAuth();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(res => {
@@ -23,7 +23,8 @@ const Login = () => {
                     imageURL: res.user.photoURL,
                     role: 'No Role',
                     shopName: 'No Shop Name',
-                    shopLogo: 'No Shop Logo'
+                    shopLogo: 'No Shop Logo',
+                    income: ''
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
@@ -37,10 +38,15 @@ const Login = () => {
                             setLoading(false);
                         }
                     })
-                const emailIncluded = shop.map(item => item.ownerEmail === res.user.email);
-                const isInclude = emailIncluded.includes(true);
-                if (isInclude) { navigate('/dashboard/managerHome') }
-                else { navigate('/createStore') }
+                axiosSecure.get(`/users/${res.user.email}`)
+                    .then(res => {
+                        console.log(res.data[0]);
+                        const isManager = res.data[0]?.role === 'manager';
+                        const isAdmin = res.data[0]?.role === 'admin';
+                        if (isManager) { navigate('/dashboard/managerHome') }
+                        else if (isAdmin) { navigate('/dashboard/adminHome') }
+                        else { navigate('/createStore') }
+                    })
 
             })
             .catch(err => {
@@ -67,10 +73,15 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    const emailIncluded = shop.map(item => item.ownerEmail === res.user.email);
-                    const isInclude = emailIncluded.includes(true);
-                    if (isInclude) { navigate('/dashboard/managerHome') }
-                    else { navigate('/createStore') }
+                    axiosSecure.get(`/users/${res.user.email}`)
+                        .then(res => {
+                            console.log(res.data[0]);
+                            const isManager = res.data[0]?.role === 'manager';
+                            const isAdmin = res.data[0]?.role === 'admin';
+                            if (isManager) { navigate('/dashboard/managerHome') }
+                            else if (isAdmin) { navigate('/dashboard/adminHome') }
+                            else { navigate('/createStore') }
+                        })
                 }
                 else {
                     Swal.fire({

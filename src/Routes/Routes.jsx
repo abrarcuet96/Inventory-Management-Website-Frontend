@@ -12,6 +12,10 @@ import ProductsSection from "../pages/ProductsSection/ProductsSection";
 import UpdateProduct from "../pages/UpdateProductDetails/UpdateProduct";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import CheckOutCart from "../pages/CheckOutCart/CheckOutCart";
+import SaleSummary from "../pages/SaleSummary/SaleSummary";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
+import ManageShop from "../pages/ManageShop/ManageShop";
+import AdminSaleSummary from "../pages/AdminSaleSummary/AdminSaleSummary";
 
 const myRoutes = createBrowserRouter([
     {
@@ -45,6 +49,10 @@ const myRoutes = createBrowserRouter([
                 element: <ManagerHome></ManagerHome>
             },
             {
+                path:'adminHome',
+                element: <AdminHome></AdminHome>
+            },
+            {
                 path:'addProduct',
                 element: <AddProduct></AddProduct>
             },
@@ -63,6 +71,18 @@ const myRoutes = createBrowserRouter([
             {
                 path:'checkOutCart',
                 element: <CheckOutCart></CheckOutCart>
+            },
+            {
+                path:'saleSummary',
+                element: <SaleSummary></SaleSummary>
+            },
+            {
+                path:'manageShop',
+                element: <ManageShop></ManageShop>
+            },
+            {
+                path:'adminSaleSummary',
+                element: <AdminSaleSummary></AdminSaleSummary>
             },
             {
                 path:'updateProductDetails/:email/:id',

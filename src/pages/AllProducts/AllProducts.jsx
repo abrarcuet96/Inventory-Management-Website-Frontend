@@ -86,7 +86,7 @@ const AllProducts = () => {
                                 <SingleProduct product={newProduct} handleProductCart={handleProductCart}></SingleProduct> :
                                 <>
                                     {
-                                        productData.map((product) =>
+                                        productData?.map((product) =>
                                             <SingleProduct key={product._id} product={product} handleProductCart={handleProductCart}></SingleProduct>)
                                     }
                                 </>

@@ -5,14 +5,36 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUser from "../../hooks/useUser";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import usePurchase from "../../hooks/usePurchase";
+import { useEffect, useState } from "react";
 const image_hosting_key = import.meta.env.VITE_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddProduct = () => {
+    const [userPurchaseData, purchaseLoading] = usePurchase();
+    console.log(userPurchaseData);
     const [userData] = useUser();
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const [maxPurchase, setMaxPurchase] = useState(0);
+    const [productLimit, setProductLimit] = useState(0);
+    useEffect(() => {
+        console.log(userPurchaseData.length);
+        if (userPurchaseData.length > 0) {
+            const maxPriceObj = purchaseLoading ? '' : userPurchaseData.reduce((maxObj, currentObj) => {
+                return currentObj.price > maxObj.price ? currentObj : maxObj;
+            }, userPurchaseData[0]);
+            console.log(maxPriceObj.price);
+            setMaxPurchase(maxPriceObj.price);
+            console.log(maxPurchase);
+            if (maxPurchase === 10) { setProductLimit(200); console.log(productLimit); }
+            else if (maxPurchase === 20) { setProductLimit(450); console.log(productLimit); }
+            else if (maxPurchase === 50) { setProductLimit(1500); console.log(productLimit); }
+            else { setProductLimit(3) }
+            console.log(productLimit);
+        }else{setProductLimit(3); console.log(productLimit);}
+    }, [userPurchaseData, purchaseLoading, maxPurchase, productLimit])
     const onSubmit = async (data) => {
         console.log(data);
         const productImageFile = { image: data.productImage[0] };
@@ -22,12 +44,14 @@ const AddProduct = () => {
             }
         });
         console.log(res.data.success);
+
         if (res.data.success) {
-            const sellingPriceBefore= parseInt(data.productionCost) + (parseInt(data.productionCost) * parseInt(data.profitMargin)) / 100;
-            const sellingPriceDiscount = ((parseInt(data.productionCost) + (parseInt(data.productionCost) * parseInt(data.profitMargin)) / 100)*parseInt(data.productDiscount))/100;
-            const sellingPrice= sellingPriceBefore-sellingPriceDiscount;
+            const sellingPriceBefore = parseInt(data.productionCost) + (parseInt(data.productionCost) * parseInt(data.profitMargin)) / 100;
+            const sellingPriceDiscount = ((parseInt(data.productionCost) + (parseInt(data.productionCost) * parseInt(data.profitMargin)) / 100) * parseInt(data.productDiscount)) / 100;
+            const sellingPrice = sellingPriceBefore - sellingPriceDiscount;
             const totalTax = (sellingPrice * 7.5) / 100;
             const totalSellingPrice = sellingPrice + totalTax;
+
             const productInfo = {
                 productName: data.productName,
                 productImage: res.data.data.display_url,
@@ -41,8 +65,8 @@ const AddProduct = () => {
                 shopName: userData[0].shopName,
                 userEmail: userData[0].email,
                 sellingPrice: (totalSellingPrice).toFixed(0),
-                saleCount: 0
-
+                saleCount: 0,
+                productLimit: productLimit
             }
             console.log(productInfo);
             const productInfoToDB = await axiosSecure.post(`/products`, productInfo);
