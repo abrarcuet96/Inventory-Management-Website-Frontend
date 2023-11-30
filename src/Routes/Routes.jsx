@@ -16,6 +16,8 @@ import SaleSummary from "../pages/SaleSummary/SaleSummary";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import ManageShop from "../pages/ManageShop/ManageShop";
 import AdminSaleSummary from "../pages/AdminSaleSummary/AdminSaleSummary";
+import PrivateRoute from "./PrivateRoute";
+import WatchDemo from "../pages/WatchDemo/WatchDemo";
 
 const myRoutes = createBrowserRouter([
     {
@@ -29,6 +31,10 @@ const myRoutes = createBrowserRouter([
             {
                 path: '/createStore',
                 element: <CreateShop></CreateShop>
+            },
+            {
+                path: '/watchDemo',
+                element: <WatchDemo></WatchDemo>
             }
         ]
     },
@@ -41,53 +47,53 @@ const myRoutes = createBrowserRouter([
         element: <Login></Login>
     },
     {
-        path:'dashboard',
-        element: <Dashboard></Dashboard>,
-        children:[
+        path: 'dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
             {
-                path:'managerHome',
+                path: 'managerHome',
                 element: <ManagerHome></ManagerHome>
             },
             {
-                path:'adminHome',
+                path: 'adminHome',
                 element: <AdminHome></AdminHome>
             },
             {
-                path:'addProduct',
+                path: 'addProduct',
                 element: <AddProduct></AddProduct>
             },
             {
-                path:'subscription',
+                path: 'subscription',
                 element: <Subscription></Subscription>
             },
             {
-                path:'productsSection',
+                path: 'productsSection',
                 element: <ProductsSection></ProductsSection>
             },
             {
-                path:'allProductsSection',
+                path: 'allProductsSection',
                 element: <AllProducts></AllProducts>
             },
             {
-                path:'checkOutCart',
+                path: 'checkOutCart',
                 element: <CheckOutCart></CheckOutCart>
             },
             {
-                path:'saleSummary',
+                path: 'saleSummary',
                 element: <SaleSummary></SaleSummary>
             },
             {
-                path:'manageShop',
+                path: 'manageShop',
                 element: <ManageShop></ManageShop>
             },
             {
-                path:'adminSaleSummary',
+                path: 'adminSaleSummary',
                 element: <AdminSaleSummary></AdminSaleSummary>
             },
             {
-                path:'updateProductDetails/:email/:id',
+                path: 'updateProductDetails/:email/:id',
                 element: <UpdateProduct></UpdateProduct>,
-                loader: ({params})=> fetch(`http://localhost:5000/products/email/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/products/email/${params.id}`)
             },
         ]
     }
