@@ -16,7 +16,6 @@ import SaleSummary from "../pages/SaleSummary/SaleSummary";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import ManageShop from "../pages/ManageShop/ManageShop";
 import AdminSaleSummary from "../pages/AdminSaleSummary/AdminSaleSummary";
-import PrivateRoute from "./PrivateRoute";
 import WatchDemo from "../pages/WatchDemo/WatchDemo";
 
 const myRoutes = createBrowserRouter([
@@ -48,7 +47,7 @@ const myRoutes = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        element: <Dashboard></Dashboard>,
         children: [
             {
                 path: 'managerHome',
@@ -56,7 +55,7 @@ const myRoutes = createBrowserRouter([
             },
             {
                 path: 'adminHome',
-                element: <AdminHome></AdminHome>
+                element: <AdminHome><AdminHome></AdminHome></AdminHome>
             },
             {
                 path: 'addProduct',
