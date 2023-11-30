@@ -7,6 +7,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const image_hosting_key= import.meta.env.VITE_IMAGE_API_KEY;
 const image_hosting_api= `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const Register = () => {
@@ -94,6 +95,9 @@ const Register = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | Register</title>
+            </Helmet>
             <div className="hero min-h-screen bg-[conic-gradient(at_bottom,_var(--tw-gradient-stops))] from-blue-700 via-blue-800 to-gray-900">
                 <div className="hero-content flex-col lg:flex-row">
                     <div className="text-center lg:text-left w-1/2">

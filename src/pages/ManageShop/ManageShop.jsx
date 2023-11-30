@@ -1,9 +1,13 @@
 
+import { Helmet } from "react-helmet-async";
 import useShop from "../../hooks/useShop";
 const ManageShop = () => {
     const [shop,shopDataLoading]= useShop();
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | Manage Shop</title>
+            </Helmet>
             <div className="my-5">
                 <h2 className="text-center text-4xl font-semibold text-blue-800">All shops are listed here</h2>
             </div>

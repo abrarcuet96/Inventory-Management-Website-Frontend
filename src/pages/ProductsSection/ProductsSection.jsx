@@ -4,6 +4,7 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const ProductsSection = () => {
     const [productData, productLoading, refetch] = useProducts();
     const axiosSecure = useAxiosSecure();
@@ -35,6 +36,9 @@ const ProductsSection = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | Products Section</title>
+            </Helmet>
             <div className="my-5">
                 <h2 className="text-center text-4xl font-semibold text-blue-800">Your all added products are listed here</h2>
             </div>

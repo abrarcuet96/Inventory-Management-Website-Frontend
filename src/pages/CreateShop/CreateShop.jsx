@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import usePurchase from "../../hooks/usePurchase";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 const image_hosting_key = import.meta.env.VITE_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const CreateShop = () => {
@@ -92,6 +93,9 @@ const CreateShop = () => {
     }
     return (
         <SectionContainer>
+            <Helmet>
+                <title>InvigoNex | Create Shop</title>
+            </Helmet>
             <h1 className="text-4xl text-center my-4 font-semibold text-blue-800">Create Your Store Here!!</h1>
             <div className="p-2 bg-base-300">
                 <form onSubmit={handleSubmit(onSubmit)}>

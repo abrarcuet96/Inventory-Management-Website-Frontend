@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useUser from "../../../hooks/useUser";
 import useProducts from "../../../hooks/useProducts";
+import { Helmet } from "react-helmet-async";
 
 const ManagerHome = () => {
     const [userData, loading] = useUser();
@@ -9,6 +10,9 @@ const ManagerHome = () => {
     console.log(productData);
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | Manager Home</title>
+            </Helmet>
             {
                 loading || productLoading ? '' : <>
                     <div className="flex justify-between m-2 items-center border-b-4 border-t-4 p-2">

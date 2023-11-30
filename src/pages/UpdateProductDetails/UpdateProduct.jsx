@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import usePurchase from "../../hooks/usePurchase";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 const image_hosting_key = import.meta.env.VITE_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const UpdateProduct = () => {
@@ -84,6 +85,9 @@ const UpdateProduct = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | Update Product</title>
+            </Helmet>
             {
                 loading ? '' : <div>
                     <h1 className="text-2xl text-center my-4 font-bold text-blue-800">Add Product Here!!</h1>

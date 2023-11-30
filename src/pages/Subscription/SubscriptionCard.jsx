@@ -2,6 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const SubscriptionCard = ({ subCard, subscription }) => {
     const [subId, setSubId] = useState('');
@@ -17,6 +18,9 @@ const SubscriptionCard = ({ subCard, subscription }) => {
     }
     return (
         <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <Helmet>
+                <title>InvigoNex | Checkout</title>
+            </Helmet>
             <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">{subCard.plan} plan</h5>
             <div className="flex items-baseline text-gray-900 dark:text-white">
                 <span className="text-3xl font-semibold">$</span>

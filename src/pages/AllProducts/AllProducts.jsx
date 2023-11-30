@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import SingleProduct from "./SingleProduct";
+import { Helmet } from "react-helmet-async";
 const AllProducts = () => {
     const [productData, productLoading] = useProducts();
     const [searchedId, setSearchedId] = useState('');
@@ -50,6 +51,9 @@ const AllProducts = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | All Products</title>
+            </Helmet>
             <div className="my-5">
                 <h2 className="text-center text-4xl font-semibold text-blue-800">Your all added products are listed here</h2>
             </div>

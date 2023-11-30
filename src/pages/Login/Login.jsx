@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { ImSpinner9 } from "react-icons/im";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
     const highlightText = {
         background: 'linear-gradient(to bottom, transparent 50%, #EA580C 50%)'
@@ -106,6 +107,9 @@ const Login = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | Login</title>
+            </Helmet>
             <div className="hero min-h-screen bg-[conic-gradient(var(--tw-gradient-stops))] from-blue-700 via-blue-800 to-gray-900" >
                 <div className="hero-content flex-col lg:flex-row">
                     <div className="text-center lg:text-left w-1/2">

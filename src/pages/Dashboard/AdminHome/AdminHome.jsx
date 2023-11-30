@@ -1,10 +1,14 @@
 
+import { Helmet } from "react-helmet-async";
 import useUser from "../../../hooks/useUser";
 
 const AdminHome = () => {
     const [userData, loading] = useUser();
     return (
         <div>
+            <Helmet>
+                <title>InvigoNex | Admin Home</title>
+            </Helmet>
             {
                 loading  ? '' : <>
                     <div className="flex flex-col justify-center items-center min-h-[100vh]">
