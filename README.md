@@ -14,6 +14,4 @@ Currently, two official plugins are available:
   <li>Shop managers can remove stockout products</li>
   <li>Admin can see all the shop managers stats</li>
   <li>Pagination has been done on the stats table</li>
-  <li>Used Techs:</li>
-  
 </ol>
