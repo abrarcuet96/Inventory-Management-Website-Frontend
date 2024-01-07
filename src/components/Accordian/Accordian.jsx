@@ -4,7 +4,7 @@ const Accordian = () => {
     return (
         <SectionContainer>
             <div className=" mx-auto my-10 border-2 p-10 rounded-lg">
-                <h2 className="main text-center text-4xl font-bold mb-5">Frequently Asked Questions</h2>
+                <h2 className="text-center text-5xl font-bold mb-5 text-blue-800">Frequently Asked Questions</h2>
                 <div className="collapse collapse-arrow bg-base-200">
                     <input type="radio" name="my-accordion-2" checked="checked" />
                     <div className="collapse-title text-xl font-medium">

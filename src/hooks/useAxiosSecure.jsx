@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure= axios.create({
-    baseURL:'http://localhost:5000'
+    baseURL:'https://inventory-management-system-backend-1pzhvx20o.vercel.app'
 })
 const useAxiosSecure = () => {
     return axiosSecure;

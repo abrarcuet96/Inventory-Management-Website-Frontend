@@ -21,7 +21,7 @@ const NavBar = () => {
                             <NavLink
                                 to="/"
                                 className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                    isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
                                 }
                             >
                                 Home
@@ -31,7 +31,7 @@ const NavBar = () => {
                             <NavLink
                                 to="/register"
                                 className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                    isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
                                 }
                             >
                                 Register
@@ -43,7 +43,7 @@ const NavBar = () => {
                                     <NavLink
                                         to="dashboard/managerHome"
                                         className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                            isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
                                         }
                                     >
                                         Dashboard
@@ -52,7 +52,7 @@ const NavBar = () => {
                                     <NavLink
                                         to="/createStore"
                                         className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                            isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
                                         }
                                     >
                                         Create_Store
@@ -63,7 +63,7 @@ const NavBar = () => {
                             <NavLink
                                 to="/watchDemo"
                                 className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "text-blue-800" : ""
+                                    isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
                                 }
                             >
                                 Watch_Demo
@@ -74,7 +74,7 @@ const NavBar = () => {
         </>
     return (
         <SectionContainer>
-            <div className="navbar bg-base-100 border-b-4 border-blue-800">
+            <div className="navbar">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -104,8 +104,8 @@ const NavBar = () => {
                         user ?
                             <>
                                 <div className="flex flex-row">
-                                    <div className="bg-white mr-2 p-1 rounded-lg max-sm:hidden  w-full">
-                                        <span className="w-30 h-2 m-2 font-semibold">{user?.displayName}</span>
+                                    <div className=" mr-2 p-1 rounded-lg max-sm:hidden  w-full">
+                                        <span className="text-blue-800 font-semibold">{user?.displayName}</span>
 
                                     </div>
                                     <img className="w-8 h-8 mr-2 rounded-full" src={user?.photoURL} alt="" />

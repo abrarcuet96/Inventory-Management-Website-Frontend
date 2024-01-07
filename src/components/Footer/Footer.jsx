@@ -1,10 +1,10 @@
 
 const Footer = () => {
     return (
-        <footer className="footer p-10 bg-neutral text-neutral-content">
+        <footer className="footer p-10 backdrop-blur-sm bg-white/30 text-neutral-content">
             <aside className='flex gap-5 justify-center items-center'>
                 <img className='w-20' src="https://i.ibb.co/SRDNMZ9/logo.png" alt="" />
-                <p className='text-2xl font-bold'>InvigoNex</p>
+                <p className='text-3xl font-bold text-blue-800'>InvigoNex</p>
             </aside>
             <nav>
                 <header className="footer-title">Social</header>

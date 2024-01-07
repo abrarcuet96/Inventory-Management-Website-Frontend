@@ -10,13 +10,13 @@ import SectionContainer from '../Container/SectionContainer';
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://inventory-management-system-backend-1pzhvx20o.vercel.app/reviews')
             .then(res => res.json())
             .then(data => setReviews(data));
     }, [])
     return (
         <SectionContainer>
-            <div className='bg-base-300 my-5'>
+            <div className='my-5'>
                 <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
 
                     {

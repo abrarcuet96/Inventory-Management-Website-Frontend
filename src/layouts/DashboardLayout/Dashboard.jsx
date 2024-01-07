@@ -29,7 +29,7 @@ const Dashboard = () => {
                     {/* Sidebar content here */}
                     {
                         loading ? <progress className="progress w-56"></progress> :
-                            <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content flex justify-between">
+                            <ul className="menu p-4 w-80 min-h-full bg-[#181818] text-base-content flex justify-between">
                                 <div>
                                     <>
                                         <div className="flex flex-col justify-center items-center">
@@ -42,47 +42,47 @@ const Dashboard = () => {
                                     {
                                         userData[0]?.role === 'admin' ?
                                             <>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/adminHome'>Admin Home</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/manageShop'>Manage Shop</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/adminSaleSummary'>Sale Summary</NavLink>
                                                 </li>
                                             </>
                                             :
                                             <>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/managerHome'>Manager Home</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/addProduct'>Add Product</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/subscription'>Subscription</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/productsSection'>Products Section</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/allProductsSection'>All Products</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/checkOutCart'>Check Out</NavLink>
                                                 </li>
-                                                <li className="font-bold">
+                                                <li className="font-bold text-white">
                                                     <NavLink to='/dashboard/saleSummary'>Sales Summary</NavLink>
                                                 </li>
                                             </>
                                     }
                                 </div>
                                 <div>
-                                    <li className="font-bold">
+                                    <li className="font-bold text-white">
                                         <NavLink to='/'>Home</NavLink>
                                     </li>
-                                    <li className="font-bold">
+                                    <li className="font-bold text-white">
                                         <NavLink to='/'><button onClick={handleLogOut}>Log Out</button></NavLink>
                                     </li>
                                 </div>

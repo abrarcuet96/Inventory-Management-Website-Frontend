@@ -92,7 +92,7 @@ const myRoutes = createBrowserRouter([
             {
                 path: 'updateProductDetails/:email/:id',
                 element: <UpdateProduct></UpdateProduct>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/email/${params.id}`)
+                loader: ({ params }) => fetch(`https://inventory-management-system-backend-1pzhvx20o.vercel.app/products/email/${params.id}`)
             },
         ]
     }

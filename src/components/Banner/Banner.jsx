@@ -1,18 +1,24 @@
-import SectionContainer from "../Container/SectionContainer";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import './Banner.css';
+import { Navigation } from 'swiper/modules';
+import b1 from '../../assets/b1.jpg';
+import b2 from '../../assets/b2.jpg';
+import b3 from '../../assets/b3.jpg';
 const Banner = () => {
     return (
-        <SectionContainer>
-            <div className="hero min-h-[80vh] my-5" style={{ backgroundImage: 'url(https://i.ibb.co/NTyfQXB/banner.jpg)' }}>
-                <div className="hero-overlay bg-opacity-60"></div>
-                <div className="hero-content text-center text-neutral-content">
-                    <div className="max-w-xl">
-                        <h1 className="mb-5 text-6xl font-bold">Manage your inventory with ease</h1>
-                        <p className="mb-5 text-3xl">Our powerful inventory management software helps you keep track of your stock levels, so you never run out of products again.</p>
-                    </div>
-                </div>
-            </div>
-        </SectionContainer>
+        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+            <SwiperSlide>
+                <img src={b1} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+                <img src={b2} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+                <img src={b3} alt="" />
+            </SwiperSlide>
+        </Swiper>
     );
 };
 
