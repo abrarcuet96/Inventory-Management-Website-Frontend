@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import SectionContainer from "../Container/SectionContainer";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 
@@ -15,23 +14,23 @@ const NavBar = () => {
     const navLinks =
         <>
             {
-                loading ? <progress className="progress w-56"></progress> :
+                loading ? <progress className="loading loading-ring loading-lg"></progress> :
                     <>
-                        <li className="text-lg font-semibold">
+                        <li className="text-xl font-semibold">
                             <NavLink
                                 to="/"
                                 className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
+                                    isPending ? "pending" : isActive ? "text-[#32E0C4]" : "text-white"
                                 }
                             >
                                 Home
                             </NavLink>
                         </li>
-                        <li className="text-lg font-semibold">
+                        <li className="text-xl font-semibold">
                             <NavLink
                                 to="/register"
                                 className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
+                                    isPending ? "pending" : isActive ? "text-[#32E0C4]" : "text-white"
                                 }
                             >
                                 Register
@@ -39,31 +38,31 @@ const NavBar = () => {
                         </li>
                         {
                             userData[0]?.role === 'manager' ?
-                                <li className="text-lg font-semibold">
+                                <li className="text-xl font-semibold">
                                     <NavLink
                                         to="dashboard/managerHome"
                                         className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
+                                            isPending ? "pending" : isActive ? "text-[#32E0C4]" : "text-white"
                                         }
                                     >
                                         Dashboard
                                     </NavLink>
-                                </li> : <li className="text-lg font-semibold">
+                                </li> : <li className="text-xl font-semibold">
                                     <NavLink
                                         to="/createStore"
                                         className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
+                                            isPending ? "pending" : isActive ? "text-[#32E0C4]" : "text-white"
                                         }
                                     >
                                         Create_Store
                                     </NavLink>
                                 </li>
                         }
-                        <li className="text-lg font-semibold">
+                        <li className="text-xl font-semibold">
                             <NavLink
                                 to="/watchDemo"
                                 className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "text-blue-800" : "text-white"
+                                    isPending ? "pending" : isActive ? "text-[#32E0C4]" : "text-white"
                                 }
                             >
                                 Watch_Demo
@@ -73,8 +72,8 @@ const NavBar = () => {
             }
         </>
     return (
-        <SectionContainer>
-            <div className="navbar">
+        <div className="bg-[#3F4E4F] py-5">
+            <div className="navbar  max-w-screen-2xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -86,10 +85,10 @@ const NavBar = () => {
                     </div>
                     <div className="flex justify-center items-center">
                         <div>
-                            <img className="w-[30px] max-lg:hidden" src="logo.png" alt="" />
+                            <img className="w-[50px] max-lg:hidden" src="box_3972677.png" alt="" />
                         </div>
                         <div>
-                            <h2 className="btn btn-ghost text-2xl font-bold text-blue-800">InvigoNex</h2>
+                            <h2 className="btn btn-ghost text-5xl font-bold text-white">InvigoNex</h2>
                         </div>
                     </div>
 
@@ -110,15 +109,16 @@ const NavBar = () => {
                                     </div>
                                     <img className="w-8 h-8 mr-2 rounded-full" src={user?.photoURL} alt="" />
                                     <Link to="/">
-                                        <button onClick={handleLogOut}><Link className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800" to="/">LogOut</Link></button>
+                                        <button onClick={handleLogOut}><Link className="text-xl font-semibold text-[#32E0C4] hover:border-b-4 hover:border-[#32E0C4]" to="/">LogOut</Link></button>
                                     </Link>
                                 </div>
-                            </> : <Link to="/login" className="text-lg font-semibold text-blue-800 hover:border-b-4 hover:border-blue-800">Login</Link>
+                            </> : <Link to="/login" className="text-xl font-semibold text-[#32E0C4] hover:border-b-4 hover:border-[#32E0C4]">Login</Link>
                     }
 
                 </div>
             </div>
-        </SectionContainer>
+        </div>
+
     );
 };
 

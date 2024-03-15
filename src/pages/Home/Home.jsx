@@ -6,7 +6,7 @@ import Testimonials from "../../components/Testimonials/Testimonials";
 
 const Home = () => {
     return (
-        <div className="max-w-screen-xl mx-auto">
+        <div className="">
             <Banner></Banner>
             <RegistrationSection></RegistrationSection>
             <Accordian></Accordian>
