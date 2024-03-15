@@ -8,7 +8,7 @@ import b2 from '../../assets/b2.jpg';
 import b3 from '../../assets/b3.jpg';
 const Banner = () => {
     return (
-        <div className="bg-[#2C3639]">
+        <div className="bg-[#222831]">
             <div className="flex max-w-screen-2xl mx-auto">
                 <div className="w-1/2 flex items-center">
                     <div>

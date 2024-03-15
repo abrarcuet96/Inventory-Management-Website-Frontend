@@ -72,7 +72,7 @@ const NavBar = () => {
             }
         </>
     return (
-        <div className="bg-[#3F4E4F] py-5">
+        <div className="bg-[#353e4b] py-5">
             <div className="navbar  max-w-screen-2xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
