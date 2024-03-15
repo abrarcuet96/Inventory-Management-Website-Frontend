@@ -16,3 +16,5 @@ Currently, two official plugins are available:
   <li>Pagination has been done on the stats table</li>
   <li>Used Techs: React, Tailwind, Firebase, Javascript, Vite, MongoDB, NodeJs, ExpressJs</li>
 </ol>
+<p>Admin email: abrarhaider@gmail.com</p>
+<p>Admin password: 12345A$</p>
