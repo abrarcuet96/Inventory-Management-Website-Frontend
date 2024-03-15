@@ -6,6 +6,7 @@ import { Navigation } from 'swiper/modules';
 import b1 from '../../assets/b1.jpg';
 import b2 from '../../assets/b2.jpg';
 import b3 from '../../assets/b3.jpg';
+import { Link } from 'react-router-dom';
 const Banner = () => {
     return (
         <div className="bg-[#222831]">
@@ -14,7 +15,7 @@ const Banner = () => {
                     <div>
                         <p className="text-6xl text-white font-bold my-9"><span className="text-7xl text-[#32E0C4]">Inventory</span> <br /> Management System</p>
                         <p className="text-2xl text-white mb-9">Streamline Your Business with our Comprehensive Inventory Management System: Effortless Tracking, Seamless Integration, Maximum Efficiency!</p>
-                        <button className="text-2xl font-semibold text-[#32E0C4] hover:border-b-4 hover:border-[#32E0C4]">Get Started</button>
+                        <Link to="/createStore"><button className="text-2xl font-semibold text-[#32E0C4] hover:border-b-4 hover:border-[#32E0C4]">Get Started</button></Link>
                     </div>
                 </div>
                 <div className="w-1/2 py-10">
