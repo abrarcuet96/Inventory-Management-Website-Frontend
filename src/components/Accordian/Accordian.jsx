@@ -1,10 +1,10 @@
-import SectionContainer from "../Container/SectionContainer";
-
 const Accordian = () => {
+    const highlightText = {
+        background: 'linear-gradient(to bottom, transparent 70%, #32E0C4 30%)'
+    }
     return (
-        <SectionContainer>
-            <div className=" mx-auto my-10 border-2 p-10 rounded-lg">
-                <h2 className="text-center text-5xl font-bold mb-5 text-blue-800">Frequently Asked Questions</h2>
+            <div className="max-w-screen-md mx-auto my-20">
+                <p className="text-center text-5xl font-semibold mb-10 text-[#222831]"><span style={highlightText} >Frequently Asked Questions</span></p>
                 <div className="collapse collapse-arrow bg-base-200">
                     <input type="radio" name="my-accordion-2" checked="checked" />
                     <div className="collapse-title text-xl font-medium">
@@ -32,8 +32,34 @@ const Accordian = () => {
                         <p>Varies by vendor, features, and business size; affordable options available.</p>
                     </div>
                 </div>
+                <div className="collapse collapse-arrow bg-base-200">
+                    <input type="radio" name="my-accordion-2" />
+                    <div className="collapse-title text-xl font-medium">
+                        How do I participate in book discussions and connect with other readers?
+                    </div>
+                    <div className="collapse-content">
+                        <p>Varies by vendor, features, and business size; affordable options available.</p>
+                    </div>
+                </div>
+                <div className="collapse collapse-arrow bg-base-200">
+                    <input type="radio" name="my-accordion-2" />
+                    <div className="collapse-title text-xl font-medium">
+                        How do I participate in book discussions and connect with other readers?
+                    </div>
+                    <div className="collapse-content">
+                        <p>Varies by vendor, features, and business size; affordable options available.</p>
+                    </div>
+                </div>
+                <div className="collapse collapse-arrow bg-base-200">
+                    <input type="radio" name="my-accordion-2" />
+                    <div className="collapse-title text-xl font-medium">
+                        How do I participate in book discussions and connect with other readers?
+                    </div>
+                    <div className="collapse-content">
+                        <p>Varies by vendor, features, and business size; affordable options available.</p>
+                    </div>
+                </div>
             </div>
-        </SectionContainer>
     );
 };
 

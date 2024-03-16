@@ -17,6 +17,7 @@ import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import ManageShop from "../pages/ManageShop/ManageShop";
 import AdminSaleSummary from "../pages/AdminSaleSummary/AdminSaleSummary";
 import WatchDemo from "../pages/WatchDemo/WatchDemo";
+// import PrivateRoute from "./PrivateRoute";
 
 const myRoutes = createBrowserRouter([
     {

@@ -102,12 +102,12 @@ const NavBar = () => {
                     {
                         user ?
                             <>
-                                <div className="flex flex-row">
+                                <div className="flex flex-row justify-center items-center">
                                     <div className=" mr-2 p-1 rounded-lg max-sm:hidden  w-full">
-                                        <span className="text-blue-800 font-semibold">{user?.displayName}</span>
+                                        <span className="text-[#32E0C4] text-xl font-semibold">{user?.displayName}</span>
 
                                     </div>
-                                    <img className="w-8 h-8 mr-2 rounded-full" src={user?.photoURL} alt="" />
+                                    <img className="w-8 h-8 mr-2 rounded-full border-2 border-[#32E0C4]" src={user?.photoURL} alt="" />
                                     <Link to="/">
                                         <button onClick={handleLogOut}><Link className="text-xl font-semibold text-[#32E0C4] hover:border-b-4 hover:border-[#32E0C4]" to="/">LogOut</Link></button>
                                     </Link>

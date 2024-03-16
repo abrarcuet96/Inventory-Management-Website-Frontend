@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import SectionContainer from "../../components/Container/SectionContainer";
 import { FaShop } from "react-icons/fa6";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -92,92 +91,96 @@ const CreateShop = () => {
         }
     }
     return (
-        <SectionContainer>
+        <div className="max-w-screen-2xl mx-auto">
             <Helmet>
                 <title>InvigoNex | Create Shop</title>
             </Helmet>
-            <h1 className="text-4xl text-center my-4 font-semibold text-blue-800">Create Your Store Here!!</h1>
-            <div className="p-2 bg-base-300">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex gap-2 flex-col md:flex-row">
+            {/* <h1 className="text-4xl text-center my-4 font-semibold text-blue-800">Create Your Store Here!!</h1> */}
+            <div className="flex">
+                <div className="w-1/2">
+                    <img className="w-full" src="gif2.gif" alt="" />
+                </div>
+                <div className="w-1/2 p-2">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+
                         {/* shop name */}
-                        <div className="form-control w-full my-2 md:w-1/2">
+                        <div className="form-control w-full my-2">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Shop Name</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Shop Name</span>
                             </label>
                             <input
                                 type="text"
-                                placeholder="write your shop name here"
+                                placeholder="Write your shop name here..."
                                 {...register("shopName", { required: true })}
-                                className="input input-bordered w-full" />
+                                className="input border-b-4 border-b-[#222831] w-full" />
                         </div>
                         {/* shop logo */}
-                        <div className="form-control w-full my-2 md:w-1/2">
+                        <div className="form-control w-full my-5">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Shop Logo</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Shop Logo</span>
                             </label>
                             <input
                                 type="file"
-                                placeholder="choose your shop logo here"
+                                placeholder="Choose your shop logo..."
                                 {...register("shopLogo", { required: true })}
-                                className="file-input input-bordered w-full" />
+                                className="file-input border-b-4 border-[#222831] w-full" />
                         </div>
-                    </div>
-                    {/* shop information */}
-                    <div className="form-control w-full my-2">
-                        <label className="label">
-                            <span className="label-text text-xl font-semibold text-blue-800">Shop Information</span>
-                        </label>
-                        <textarea
-                            type="text"
-                            placeholder="write your shop information here"
-                            {...register("shopInfo", { required: true })}
-                            className="input input-bordered w-full">
-                        </textarea>
-                    </div>
-                    {/* shop location */}
-                    <div className="form-control w-full my-2">
-                        <label className="label">
-                            <span className="label-text text-xl font-semibold text-blue-800">Shop Location</span>
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="write your shop location here"
-                            {...register("shopLocation", { required: true })}
-                            className="input input-bordered w-full" />
-                    </div>
-                    <div className="flex gap-2 flex-col md:flex-row">
-                        {/* shop owner email */}
-                        <div className="form-control w-full my-2 md:w-1/2">
+
+                        {/* shop information */}
+                        <div className="form-control w-full my-5">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Shop Owner Email</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Shop Information</span>
                             </label>
-                            <input
-                                type="email"
-                                placeholder="write your email here"
-                                {...register("ownerEmail", { required: true })}
-                                className="input input-bordered w-full" />
+                            <textarea
+                                type="text"
+                                placeholder="Write your shop information here..."
+                                {...register("shopInfo", { required: true })}
+                                className="input border-b-4 border-b-[#222831] w-full">
+                            </textarea>
                         </div>
-                        {/* shop owner name */}
-                        <div className="form-control w-full my-2 md:w-1/2">
+                        {/* shop location */}
+                        <div className="form-control w-full my-5">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Shop Owner Name</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Shop Location</span>
                             </label>
                             <input
                                 type="text"
-                                placeholder="write your name here"
-                                {...register("ownerName", { required: true })}
-                                className="input input-bordered w-full" />
+                                placeholder="Write your shop location here..."
+                                {...register("shopLocation", { required: true })}
+                                className="input border-b-4 border-b-[#222831] w-full"/>
                         </div>
-                    </div>
-                    <div className="flex justify-center my-2">
-                        
-                            <button className="btn btn-primary bg-blue-800 text-white  font-semibold cursor-pointer p-1 px-3 w-full rounded-lg text-xl">Create Shop <FaShop className="" /></button>
-                        
-                    </div>
-                </form>
+                        {/* shop owner email */}
+                        <div className="form-control w-full my-5">
+                            <label className="label">
+                                <span className="label-text text-xl font-bold text-[#222831]">Shop Owner Email</span>
+                            </label>
+                            <input
+                                type="email"
+                                placeholder="Write your email here..."
+                                {...register("ownerEmail", { required: true })}
+                                className="input border-b-4 border-b-[#222831] w-full" />
+                        </div>
+                        {/* shop owner name */}
+                        <div className="form-control w-full my-5">
+                            <label className="label">
+                                <span className="label-text text-xl font-bold text-[#222831]">Shop Owner Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Write your name here..."
+                                {...register("ownerName", { required: true })}
+                                className="input border-b-4 border-b-[#222831] w-full" />
+                        </div>
+                        <div className="flex justify-center my-5">
+
+                            <button className="btn hover:bg-[#32E0C4] bg-[#5be2cc] text-[#222831]  font-semibold cursor-pointer p-1 px-3 rounded-lg text-lg">Create Shop <FaShop className="" /></button>
+
+                        </div>
+                    </form>
+                </div>
+
             </div>
-        </SectionContainer>
+        </div>
     );
 };
 
