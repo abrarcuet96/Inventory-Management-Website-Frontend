@@ -22,19 +22,19 @@ const RegistrationSection = () => {
     return (
         <div className='bg-[#353e4b]'>
             <div className="hero min-h-[60vh] max-w-screen-2xl mx-auto bg-[#222831] rounded-b-full">
-                <div className="hero-content flex p-10">
+                <div className="hero-content flex flex-col md:flex-row p-10">
                     <div>
-                        <p className="text-7xl font-semibold mb-10 text-white"><span>Want more insights?</span></p>
-                        <p className="max-w-screen-xl text-white text-2xl mb-10 mx-auto">Send us an email.</p>
+                        <p className="text-3xl lg:text-7xl font-semibold mb-10 text-white text-center md:text-left"><span>Want more insights?</span></p>
+                        <p className="max-w-screen-xl text-white text-xl lg:text-2xl mb-10 mx-auto text-center md:text-left">Send us an email.</p>
                     </div>
                     <div
                         className="card shrink-0 w-full max-w-sm shadow-2xl backdrop-blur-sm bg-[#353e4b] rounded-md">
                         <form className="card-body" ref={form} onSubmit={sendEmail}>
-                            <input className='bg-[#222831]  text-lg text-black p-5' placeholder='Full Name' type="text" name="user_name" />
-                            <input className='bg-[#222831]  text-lg text-black p-5' placeholder='Your Email' type="email" name="user_email" />
-                            <textarea className='bg-[#222831] text-lg text-black p-5' placeholder='Details' name="message" />
+                            <input className='bg-[#222831]  text-md md:text-lg text-black p-5' placeholder='Full Name' type="text" name="user_name" />
+                            <input className='bg-[#222831]  text-md md:text-lg text-black p-5' placeholder='Your Email' type="email" name="user_email" />
+                            <textarea className='bg-[#222831] text-md md:text-lg text-black p-5' placeholder='Details' name="message" />
                             <div className='text-center mt-6'>
-                                <button type="submit" className='btn btn-ghost btn-lg text-xl btn-outline text-gray-400 w-full'>Send</button>
+                                <button type="submit" className='btn btn-ghost btn-lg text-lg md:text-xl btn-outline text-gray-400 w-full'>Send</button>
 
                             </div>
                         </form>
