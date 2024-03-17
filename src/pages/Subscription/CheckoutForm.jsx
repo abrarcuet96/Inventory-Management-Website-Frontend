@@ -187,7 +187,7 @@ const CheckoutForm = ({ subCard }) => {
                     <button
                         type='submit'
                         disabled={!stripe || !clientSecret || processing}
-                        className='inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2'
+                        className='inline-flex justify-center rounded-md border border-transparent text-[#222831] hover:bg-[#32E0C4] bg-[#5be2cc] px-4 py-2 text-sm font-medium  focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2'
                     >
                         {processing ? (
                             <ImSpinner9 className='m-auto animate-spin' size={24} />

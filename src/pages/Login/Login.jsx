@@ -110,7 +110,7 @@ const Login = () => {
             <Helmet>
                 <title>InvigoNex | Login</title>
             </Helmet>
-            <div className="hero min-h-screen bg-[conic-gradient(var(--tw-gradient-stops))] from-blue-700 via-blue-800 to-gray-900" >
+            <div className="hero min-h-screen bg-[conic-gradient(var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black" >
                 <div className="hero-content flex-col lg:flex-row">
                     <div className="text-center lg:text-left w-1/2">
                         <h1 className="text-5xl font-bold text-blue-100">Unlock Your Inventory Insights <br />- <span className="text-white font-bold" style={highlightText}>Log in Here!</span></h1>

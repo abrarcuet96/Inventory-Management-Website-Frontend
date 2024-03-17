@@ -54,7 +54,7 @@ const NavBar = () => {
                                             isPending ? "pending" : isActive ? "text-[#32E0C4]" : "text-white"
                                         }
                                     >
-                                        Create_Store
+                                        Create Store
                                     </NavLink>
                                 </li>
                         }
@@ -65,7 +65,7 @@ const NavBar = () => {
                                     isPending ? "pending" : isActive ? "text-[#32E0C4]" : "text-white"
                                 }
                             >
-                                Watch_Demo
+                                Watch Demo
                             </NavLink>
                         </li>
                     </>

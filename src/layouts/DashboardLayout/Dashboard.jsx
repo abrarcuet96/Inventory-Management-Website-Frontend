@@ -34,8 +34,8 @@ const Dashboard = () => {
                                     <>
                                         <div className="flex flex-col justify-center items-center">
                                             <div className="flex flex-col justify-center items-center">
-                                                <img className="w-[50px] mb-2 rounded-full" src={userData[0]?.imageURL} alt="" />
-                                                <h2 className="text-xl mb-2 font-semibold">{userData[0]?.name}</h2>
+                                                <img className="w-[50px] mb-2 rounded-full border-2 border-[#32E0C4]" src={userData[0]?.imageURL} alt="" />
+                                                <h2 className="text-[#32E0C4] text-xl font-semibold mb-2">{userData[0]?.name}</h2>
                                             </div>
                                         </div>
                                     </>

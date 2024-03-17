@@ -7,9 +7,11 @@ import useAuth from "../../hooks/useAuth";
 import usePurchase from "../../hooks/usePurchase";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 const image_hosting_key = import.meta.env.VITE_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const CreateShop = () => {
+    const navigate= useNavigate();
     const [userPurchaseData, purchaseLoading] = usePurchase();
     const [maxPurchase, setMaxPurchase] = useState(0);
     const [productLimit, setProductLimit] = useState(0);
@@ -76,6 +78,7 @@ const CreateShop = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    navigate('/dashboard/managerHome');
                 }
             }
             else {
@@ -173,7 +176,7 @@ const CreateShop = () => {
                         </div>
                         <div className="flex justify-center my-5">
 
-                            <button className="btn hover:bg-[#32E0C4] bg-[#5be2cc] text-[#222831]  font-semibold cursor-pointer p-1 px-3 rounded-lg text-lg">Create Shop <FaShop className="" /></button>
+                            <button className="btn hover:bg-[#32E0C4] bg-[#5be2cc] text-[#222831]  font-semibold cursor-pointer p-1 px-3 rounded-lg text-lg">Create Store <FaShop className="" /></button>
 
                         </div>
                     </form>

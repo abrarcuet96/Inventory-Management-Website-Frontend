@@ -98,7 +98,7 @@ const Register = () => {
             <Helmet>
                 <title>InvigoNex | Register</title>
             </Helmet>
-            <div className="hero min-h-screen bg-[conic-gradient(at_bottom,_var(--tw-gradient-stops))] from-blue-700 via-blue-800 to-gray-900">
+            <div className="hero min-h-screen bg-[conic-gradient(var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
                 <div className="hero-content flex-col lg:flex-row">
                     <div className="text-center lg:text-left w-1/2">
                         <h1 className="text-5xl font-bold text-white">Optimize, Organize, and Own Your Inventory <br />– <span className="text-white font-bold" style={highlightText}>Register Today!</span></h1>

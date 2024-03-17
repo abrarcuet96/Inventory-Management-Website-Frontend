@@ -11,6 +11,9 @@ import { Helmet } from "react-helmet-async";
 const image_hosting_key = import.meta.env.VITE_IMAGE_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddProduct = () => {
+    const highlightText2 = {
+        background: 'linear-gradient(to bottom, transparent 70%, #32E0C4 30%)'
+    }
     const [userPurchaseData, purchaseLoading] = usePurchase();
     console.log(userPurchaseData);
     const [userData] = useUser();
@@ -98,79 +101,79 @@ const AddProduct = () => {
             <Helmet>
                 <title>InvigoNex | Add Product</title>
             </Helmet>
-            <h1 className="text-2xl text-center my-4 font-bold text-blue-800">Add Product Here!!</h1>
-            <div className="p-2 bg-base-300 m-2">
+            <h1 className="text-center text-6xl font-semibold mt-10 mb-10 text-[#222831]"><span style={highlightText2}>Add Product Here!!</span></h1>
+            <div className="p-5 m-5">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex gap-2 flex-col md:flex-row">
                         {/* shop name */}
                         <div className="form-control w-full my-2 md:w-1/2">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Product Name</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Product Name</span>
                             </label>
                             <input
                                 type="text"
                                 placeholder="write your product name here"
                                 {...register("productName", { required: true })}
-                                className="input input-bordered w-full" />
+                                className="input border-b-4 border-b-[#222831] w-full" />
                         </div>
                         {/* shop logo */}
                         <div className="form-control w-full my-2 md:w-1/2">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Product Image</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Product Image</span>
                             </label>
                             <input
                                 type="file"
                                 placeholder="choose your product image here"
                                 {...register("productImage", { required: true })}
-                                className="file-input input-bordered w-full" />
+                                className="file-input border-b-4 border-[#222831] w-full" />
                         </div>
                     </div>
                     {/* shop information */}
                     <div className="form-control w-full my-2">
                         <label className="label">
-                            <span className="label-text text-xl font-semibold text-blue-800">Product Description</span>
+                            <span className="label-text text-xl font-bold text-[#222831]">Product Description</span>
                         </label>
                         <textarea
                             type="text"
                             placeholder="write your product description here"
                             {...register("productDescription", { required: true })}
-                            className="input input-bordered w-full">
+                            className="input border-b-4 border-b-[#222831] w-full">
                         </textarea>
                     </div>
                     {/* shop location */}
                     <div className="form-control w-full my-2">
                         <label className="label">
-                            <span className="label-text text-xl font-semibold text-blue-800">Product Location</span>
+                            <span className="label-text text-xl font-bold text-[#222831]">Product Location</span>
                         </label>
                         <input
                             type="text"
                             placeholder="write your product location here"
                             {...register("productLocation", { required: true })}
-                            className="input input-bordered w-full" />
+                            className="input border-b-4 border-b-[#222831] w-full" />
                     </div>
                     <div className="flex gap-2 flex-col md:flex-row">
                         {/* shop owner email */}
                         <div className="form-control w-full my-2 md:w-1/2">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Production Cost</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Production Cost</span>
                             </label>
                             <input
                                 type="number"
                                 placeholder="write your product cost here"
                                 {...register("productionCost", { required: true })}
-                                className="input input-bordered w-full"
+                                className="input border-b-4 border-b-[#222831] w-full"
                                 min={0} />
                         </div>
                         {/* shop owner name */}
                         <div className="form-control w-full my-2 md:w-1/2">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Product Quantity</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Product Quantity</span>
                             </label>
                             <input
                                 type="number"
                                 placeholder="give your product quantity here"
                                 {...register("productQuantity", { required: true })}
-                                className="input input-bordered w-full"
+                                className="input border-b-4 border-b-[#222831] w-full"
                                 min={0} />
                         </div>
                     </div>
@@ -178,30 +181,30 @@ const AddProduct = () => {
                         {/* shop owner email */}
                         <div className="form-control w-full my-2 md:w-1/2">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Profit Margin(%)</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Profit Margin(%)</span>
                             </label>
                             <input
                                 type="number"
                                 placeholder="write your profit margin here"
                                 {...register("profitMargin", { required: true })}
-                                className="input input-bordered w-full"
+                                className="input border-b-4 border-b-[#222831] w-full"
                                 min={0} />
                         </div>
                         {/* shop owner name */}
                         <div className="form-control w-full my-2 md:w-1/2">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-blue-800">Discount(%)</span>
+                                <span className="label-text text-xl font-bold text-[#222831]">Discount(%)</span>
                             </label>
                             <input
                                 type="number"
                                 placeholder="write available discount here"
                                 {...register("productDiscount", { required: true })}
-                                className="input input-bordered w-full"
+                                className="input border-b-4 border-b-[#222831] w-full"
                                 min={0} />
                         </div>
                     </div>
                     <div className="flex justify-center my-2">
-                        <button className="btn btn-primary bg-blue-800 text-white  font-semibold cursor-pointer p-1 px-3 w-1/2 rounded-lg text-xl">Add Product <IoAddCircleOutline /></button>
+                        <button className="btn hover:bg-[#32E0C4] bg-[#5be2cc] text-[#222831]  font-semibold cursor-pointer p-1 px-3 rounded-lg text-lg">Add Product <IoAddCircleOutline /></button>
                     </div>
                 </form>
             </div>
